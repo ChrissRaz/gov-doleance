@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Header, Sidebar, PageWrapper } from '../../components/layout';
 import { PageTitle, Select } from '../../components/ui';
 
@@ -158,9 +159,12 @@ export default function SectorView() {
                   <span className="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary/50 cursor-pointer">
                     Arbitrer / Escalader
                   </span>
-                  <span className="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary/50 cursor-pointer">
+                  <Link
+                    to={`/dashboard/sector/${sector.key}`}
+                    className="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary/50 cursor-pointer inline-block"
+                  >
                     Voir fiche secteur
-                  </span>
+                  </Link>
                 </div>
               </div>
             ))}

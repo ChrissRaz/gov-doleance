@@ -44,16 +44,16 @@ export default function Login() {
               <span className="text-white font-bold text-2xl">P</span>
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-text mb-2">
-              Connexion administrateur
+              Fidirana amin’ny mpitantana
             </h1>
             <p className="text-gray-600">
-              Accédez au tableau de bord présidentiel
+              Midira amin’ny tabilao fitantanana
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <Input
-              label="Email"
+                label="Mailaka"
               name="email"
               type="email"
               placeholder="admin@gouv.com"
@@ -63,7 +63,7 @@ export default function Login() {
             />
 
             <Input
-              label="Mot de passe"
+                label="Teny miafina"
               name="password"
               type="password"
               placeholder="••••••••"
@@ -75,16 +75,16 @@ export default function Login() {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="rounded" />
-                <span className="text-gray-600">Se souvenir de moi</span>
-              </label>
-              <a href="#" className="text-primary hover:underline">
-                Mot de passe oublié ?
-              </a>
-            </div>
+                  <span className="text-gray-600">Tsarovy aho</span>
+                </label>
+                <a href="#" className="text-primary hover:underline">
+                  Hadino ny teny miafina ?
+                </a>
+              </div>
 
-            <Button type="submit" size="lg" className="w-full">
-              Se connecter
-            </Button>
+              <Button type="submit" size="lg" className="w-full">
+                Hiditra
+              </Button>
           </form>
         </Card>
       </PageWrapper>

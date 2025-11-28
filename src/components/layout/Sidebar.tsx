@@ -19,7 +19,7 @@ const menuItems: SidebarItem[] = [
     )
   },
   {
-    label: 'Doléances',
+    label: 'Fitarainana',
     path: '/dashboard/complaints',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ const menuItems: SidebarItem[] = [
     )
   },
   {
-    label: 'Secteurs',
+    label: 'Sehatra',
     path: '/dashboard/sectors',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@ const menuItems: SidebarItem[] = [
     )
   },
   {
-    label: 'Paramètres',
+    label: 'Fikirana',
     path: '/dashboard/settings',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

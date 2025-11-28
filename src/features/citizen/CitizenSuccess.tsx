@@ -32,7 +32,7 @@ export default function CitizenSuccess() {
               Doléance envoyée avec succès !
             </h1>
             <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed">
-              Votre voix compte. Nous avons bien reçu votre message et notre système l'analyse en ce moment même.
+              Votre voix compte. Nous avons bien reçu votre message et il a été transmis. Vous êtes en copie du mail envoyé.
             </p>
           </div>
 
@@ -61,58 +61,6 @@ export default function CitizenSuccess() {
               </p>
             </div>
 
-            {/* Prochaines étapes */}
-            <div className="mb-6">
-              <h2 className="text-xl font-bold text-text mb-4 flex items-center gap-2">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-                Que se passe-t-il maintenant ?
-              </h2>
-              <div className="space-y-4">
-                {[
-                  {
-                    step: '1',
-                    title: 'Analyse automatique',
-                    description: 'Notre système classe votre doléance par secteur et niveau d\'urgence',
-                    time: 'En cours',
-                    color: 'bg-blue-500'
-                  },
-                  {
-                    step: '2',
-                    title: 'Transmission au ministère',
-                    description: 'Votre message est transmis au ministère concerné pour traitement',
-                    time: '24-48h',
-                    color: 'bg-yellow-500'
-                  },
-                  {
-                    step: '3',
-                    title: 'Suivi et action',
-                    description: 'Le ministère examine votre doléance et planifie les actions nécessaires',
-                    time: '3-7 jours',
-                    color: 'bg-green-500'
-                  }
-                ].map((item) => (
-                  <div key={item.step} className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border-2 border-gray-200 hover:border-primary/30 transition-colors">
-                    <div className={`w-10 h-10 ${item.color} rounded-full flex items-center justify-center text-white font-bold shadow-md flex-shrink-0`}>
-                      {item.step}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-bold text-text">{item.title}</h3>
-                        <span className="text-xs font-semibold text-gray-600 bg-gray-200 px-3 py-1 rounded-full">
-                          {item.time}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Statistiques d'impact */}
             <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
@@ -130,7 +78,7 @@ export default function CitizenSuccess() {
           {/* Actions principales */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link to="/citoyens" className="block">
-              <button className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-bold text-base py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 border-2 border-primary/20">
+              <button className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white font-bold text-base py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
