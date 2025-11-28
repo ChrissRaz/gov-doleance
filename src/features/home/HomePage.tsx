@@ -23,16 +23,16 @@ export default function HomePage() {
                 <div className="w-10 h-10 bg-gradient-to-br from-primary to-green-600 rounded-full flex items-center justify-center shadow-md">
                   <span className="text-white font-bold text-lg">🇲🇬</span>
                 </div>
-                <span className="text-sm font-bold text-primary uppercase tracking-wide">Initiative Citoyenne</span>
+                <span className="text-sm font-bold text-primary uppercase tracking-wide">Fandraisana feo ho an’ny vahoaka</span>
               </div>
 
               <h1 className="text-4xl md:text-6xl font-bold text-text mb-6 leading-tight">
-                Parlez au Président
+                Miresaha mivantana amin’ny Fiadidian’ny Repoblika
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
-                Votre voix compte dans la construction d'un <span className="font-bold text-green-600">Madagascar meilleur</span>.
-                Faites entendre vos préoccupations directement.
+                Zava-dehibe ny feonao amin’ny fanorenana <span className="font-bold text-green-600">Madagasikara tsara kokoa</span>.
+                Ampitapeo mivantana ny olana sy ny soso-kevitrao.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -41,7 +41,7 @@ export default function HomePage() {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
-                    Déposer une doléance
+                    Mametraka fitarainana
                   </button>
                 </Link>
               </div>
@@ -52,7 +52,7 @@ export default function HomePage() {
               {[
                 {
                   number: '1,234',
-                  label: 'Doléances reçues',
+                  label: 'Fitarainana voaray',
                   icon: (
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -63,7 +63,7 @@ export default function HomePage() {
                 },
                 {
                   number: '678',
-                  label: 'Problèmes résolus',
+                  label: 'Olana voavaha',
                   icon: (
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -74,7 +74,7 @@ export default function HomePage() {
                 },
                 {
                   number: '22',
-                  label: 'Régions couvertes',
+                  label: 'Faritra voarakotra',
                   icon: (
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -104,10 +104,10 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-white via-blue-50/30 to-green-50/30 border-2 border-gray-200 rounded-2xl p-8 md:p-12 shadow-xl mb-16">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-                  Comment ça marche ?
+                  Ahoana no fiasan’izany ?
                 </h2>
                 <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                  Un processus simple et transparent pour que votre voix soit entendue
+                  Dingana tsotra sy mangarahara ahafahan’ny feonao tonga any amin’ny tompon’andraikitra
                 </p>
               </div>
 
@@ -115,8 +115,8 @@ export default function HomePage() {
                 {[
                   {
                     step: '1',
-                    title: 'Déposez votre doléance',
-                    description: 'Remplissez le formulaire en décrivant votre préoccupation. Simple et rapide.',
+                    title: 'Alefaso ny fitarainana',
+                    description: 'Fenoy ny taratasy amin’ny antsipiriany fohy. Tsotra sy haingana.',
                     icon: (
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -127,8 +127,8 @@ export default function HomePage() {
                   },
                   {
                     step: '2',
-                    title: 'Analyse automatique',
-                    description: 'Notre système classe votre doléance par secteur et niveau d\'urgence.',
+                    title: 'Famakafakana mandeha ho azy',
+                    description: 'Rafitra IA manasokajy araka ny sehatra sy ny haavon’ny filàna maika.',
                     icon: (
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -139,8 +139,8 @@ export default function HomePage() {
                   },
                   {
                     step: '3',
-                    title: 'Traitement et action',
-                    description: 'Le ministère concerné examine et planifie les actions nécessaires.',
+                    title: 'Fandraisana andraikitra',
+                    description: 'Ny sampan-draharaha voakasika no mandinika sy mandrafitra hetsika.',
                     icon: (
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -170,23 +170,23 @@ export default function HomePage() {
             <div className="bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary/20 rounded-2xl p-8 md:p-12 shadow-lg">
               <div className="text-center mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                  Tous les secteurs couverts
+                  Sehatra rehetra raisina
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Quelle que soit votre préoccupation, nous l'écoutons
+                  Na inona na inona olana taterinao dia henoinay
                 </p>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: 'Santé', icon: '🏥' },
-                  { name: 'Infrastructure', icon: '🏗️' },
-                  { name: 'Éducation', icon: '📚' },
-                  { name: 'Agriculture', icon: '🌾' },
-                  { name: 'Énergie', icon: '⚡' },
-                  { name: 'Eau', icon: '💧' },
-                  { name: 'Sécurité', icon: '🛡️' },
-                  { name: 'Environnement', icon: '🌱' }
+                  { name: 'Fahasalamana', icon: '🏥' },
+                  { name: 'Rafitra fototra', icon: '🏗️' },
+                  { name: 'Fanabeazana', icon: '📚' },
+                  { name: 'Fambolena', icon: '🌾' },
+                  { name: 'Herinaratra', icon: '⚡' },
+                  { name: 'Rano', icon: '💧' },
+                  { name: 'Fiarovana', icon: '🛡️' },
+                  { name: 'Tontolo iainana', icon: '🌱' }
                 ].map((sector) => (
                   <div
                     key={sector.name}

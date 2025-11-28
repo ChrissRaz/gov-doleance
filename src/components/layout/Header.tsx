@@ -28,6 +28,14 @@ export default function Header({ showNav = false }: HeaderProps) {
 
           {showNav && (
             <nav className="flex items-center gap-4">
+              <select
+                defaultValue="mg"
+                className="text-sm font-medium border border-gray-200 rounded-lg px-3 py-2 bg-white hover:border-primary/60 focus:outline-none"
+                aria-label="Changer de langue"
+              >
+                <option value="mg">MG</option>
+                <option value="fr">FR</option>
+              </select>
               <Link
                 to="/dashboard"
                 className="text-sm font-medium text-text hover:text-primary transition-colors"

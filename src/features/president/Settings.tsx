@@ -18,6 +18,11 @@ const priorityOptions = [
   { value: 'low', label: 'Priorité basse' },
 ];
 
+const languageOptions = [
+  { value: 'mg', label: 'Malagasy (par défaut)' },
+  { value: 'fr', label: 'Français' },
+];
+
 export default function Settings() {
   return (
     <div className="flex min-h-screen bg-gradient-to-b from-background to-white">
@@ -70,6 +75,17 @@ export default function Settings() {
               <Input label="Sujet (optionnel)" placeholder="Ex: Rupture de médicaments, RN7, cyberattaque..." />
               <Select label="Niveau de priorité" options={priorityOptions} defaultValue="medium" />
               <Button variant="primary">Appliquer la priorité</Button>
+            </FormGroup>
+          </Card>
+
+          <Card className="border-2 border-gray-200 mt-6">
+            <h3 className="text-lg font-bold text-text mb-2">Langue du portail</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Choisissez la langue par défaut pour l’interface publique et les notifications.
+            </p>
+            <FormGroup>
+              <Select label="Langue" options={languageOptions} defaultValue="mg" />
+              <Button variant="primary">Enregistrer la langue</Button>
             </FormGroup>
           </Card>
 
