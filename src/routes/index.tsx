@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import CitizenForm from '../features/citizen/CitizenForm';
 import CitizenSuccess from '../features/citizen/CitizenSuccess';
 import Dashboard from '../features/president/Dashboard';
@@ -19,6 +19,8 @@ export default function Router() {
         <Route path="/dashboard/complaints" element={<Complaints />} />
         <Route path="/dashboard/sectors" element={<SectorView />} />
         <Route path="/dashboard/sector/:sectorName" element={<SectorDetail />} />
+        {/* Redirection legacy /dashboard/stats vers la vue d'ensemble */}
+        <Route path="/dashboard/stats" element={<Navigate to="/dashboard" replace />} />
         <Route path="/design-system" element={<DesignSystemPreview />} />
       </Routes>
     </BrowserRouter>
