@@ -28,18 +28,30 @@ const categories = [
 export default function PortalPage() {
   return (
     <div className="min-h-screen bg-[#e9f1f8]">
-      <Header showNav />
+      <Header showNav variant="citizen" />
 
       <PageWrapper maxWidth="xl" className="pb-16">
+        <div className="mt-10 mb-8 text-center space-y-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-text">
+            Accédez aux Services Publics en Toute Simplicité
+          </h1>
+          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+            Parcourez les services par catégorie, retrouvez les démarches les plus demandées et bénéficiez d’un espace moderne, conçu pour vous accompagner à chaque étape. Votre voix compte, et vos besoins sont au cœur de l’action publique.
+          </p>
+        </div>
+
         {/* Barre de recherche */}
-        <div className="mt-10 mb-12">
-          <div className="bg-white/80 rounded-full shadow-xl px-4 py-2 flex items-center gap-3 border border-white/60">
+        <div className="mb-12">
+          <div className="bg-white rounded-full px-4 py-2 flex items-center gap-3 border border-white/80 shadow-[0_24px_80px_-40px_rgba(15,23,42,0.55)]">
             <input
               type="text"
               placeholder="Exemple : Obtenir son passeport..."
               className="flex-1 bg-transparent px-4 py-3 text-gray-700 placeholder:text-gray-400 focus:outline-none"
             />
-            <button className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:shadow-xl transition">
+            <button
+              aria-label="Rechercher"
+              className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center shadow-[0_14px_36px_-14px_rgba(37,176,153,0.8)] hover:shadow-[0_16px_42px_-14px_rgba(37,176,153,0.95)] hover:scale-[1.03] active:scale-[0.98] transition"
+            >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="7" strokeWidth="2" />
                 <path d="m16 16 3.5 3.5" strokeWidth="2" strokeLinecap="round" />

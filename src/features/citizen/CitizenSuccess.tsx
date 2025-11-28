@@ -8,7 +8,7 @@ export default function CitizenSuccess() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-white">
-      <Header showNav />
+      <Header showNav variant="citizen" />
       <PageWrapper maxWidth="md">
         <div className="mt-8 mb-12">
           {/* Animation de succès */}

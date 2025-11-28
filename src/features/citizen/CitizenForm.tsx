@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Header, PageWrapper } from '../../components/layout';
 import { Card, Input, Textarea, Button, FormGroup } from '../../components/ui';
 import Select from '../../components/ui/Select';
@@ -61,17 +61,28 @@ export default function CitizenForm() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header showNav />
+      <Header showNav variant="citizen" />
 
       <PageWrapper maxWidth="lg" className="py-10">
         <div className="max-w-3xl mx-auto">
+          <div className="mb-6">
+            <Link to="/">
+              <button className="px-5 py-2.5 bg-white text-text font-semibold rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600 transition-colors flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Hiverina
+              </button>
+            </Link>
+          </div>
+
           <Card className="shadow-lg border border-gray-100/80" padding="lg">
             <div className="text-center mb-10 space-y-3">
               <h1 className="text-3xl md:text-4xl font-extrabold text-text tracking-tight">
                 Mametraka fitarainana
               </h1>
               <p className="text-base md:text-lg text-gray-700">
-                Fenoy amin’ny teny tsotra eto ambany. Fikarakarana mandeha ho azy ao anatin’ny 30 segondra.
+                Fenoy amin'ny teny tsotra eto ambany. Fikarakarana mandeha ho azy ao anatin'ny 30 segondra.
               </p>
             </div>
 

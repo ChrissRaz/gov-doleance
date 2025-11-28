@@ -5,7 +5,7 @@ import { Header, PageWrapper } from '../../components/layout';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-      <Header showNav />
+      <Header showNav variant="citizen" />
 
       {/* Hero Section */}
       <div className="relative overflow-hidden">
