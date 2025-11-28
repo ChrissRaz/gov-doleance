@@ -39,7 +39,7 @@ export default function CitizenForm() {
     e.preventDefault();
     console.log('Doléance soumise:', formData);
     // TODO: Envoyer vers API puis IA
-    navigate('/success');
+    navigate('/citoyens/success');
   };
 
   const handleChange = (
@@ -57,9 +57,65 @@ export default function CitizenForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-primary/10 to-emerald-50/40">
       <Header showNav />
-      <PageWrapper maxWidth="md">
+
+      {/* Hero public */}
+      <div className="bg-gradient-to-r from-white via-primary/8 to-emerald-50 border-b border-gray-100/80">
+        <PageWrapper maxWidth="md" className="py-10">
+          <div className="text-center space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-white/90 px-4 py-2 text-sm font-semibold text-primary shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-primary" />
+              Portail de doléances citoyennes
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-text leading-tight tracking-tight">
+              Parlez au Président
+            </h1>
+            <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto leading-relaxed">
+              Votre voix compte pour construire un Madagascar meilleur. Partagez vos préoccupations en quelques minutes, nous les classons et les acheminons aux décideurs.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { text: 'Classement IA en -30 sec', color: 'text-primary border-primary/30' },
+                { text: 'Données hébergées en souverain', color: 'text-emerald-700 border-emerald-200' },
+                { text: 'Urgences priorisées', color: 'text-amber-700 border-amber-200' },
+              ].map((badge) => (
+                <span
+                  key={badge.text}
+                  className={`rounded-full bg-white/95 px-4 py-2 text-sm font-semibold shadow-sm border ${badge.color}`}
+                >
+                  {badge.text}
+                </span>
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <Button
+                variant="primary"
+                className="px-6 py-3 text-base font-semibold shadow-lg"
+                onClick={() => document.getElementById('form-dol')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Déposer une doléance maintenant
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-4 shadow-sm">
+                <p className="text-sm font-semibold text-blue-700">Doléances reçues</p>
+                <p className="text-2xl font-bold text-text">1 234</p>
+              </div>
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 shadow-sm">
+                <p className="text-sm font-semibold text-emerald-700">Problèmes résolus</p>
+                <p className="text-2xl font-bold text-text">678</p>
+              </div>
+              <div className="rounded-2xl border border-purple-200 bg-purple-50/70 p-4 shadow-sm">
+                <p className="text-sm font-semibold text-purple-700">Régions couvertes</p>
+                <p className="text-2xl font-bold text-text">22</p>
+              </div>
+            </div>
+          </div>
+        </PageWrapper>
+      </div>
+
+      <PageWrapper maxWidth="md" id="form-dol">
         <Card className="mt-8 shadow-xl border-2 border-gray-100" padding="lg">
           {/* En-tête avec meilleur contraste visuel */}
           <div className="text-center mb-10">

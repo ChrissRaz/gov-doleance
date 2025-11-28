@@ -129,7 +129,7 @@ export default function CitizenSuccess() {
 
           {/* Actions principales */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link to="/" className="block">
+            <Link to="/citoyens" className="block">
               <button className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-bold text-base py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 border-2 border-primary/20">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

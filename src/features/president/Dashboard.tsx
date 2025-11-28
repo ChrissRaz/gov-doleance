@@ -202,8 +202,69 @@ export default function Dashboard() {
             ))}
           </div>
 
+
+          {/* Statistiques régionales et sectorielles (intégrées) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+            <Card className="border-2 border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-text">Top régions (volume & urgences)</h3>
+                <span className="text-xs text-gray-500">Mise à jour: il y a 1h</span>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {topRegions.map((r) => (
+                  <div key={r.name} className="py-3 flex items-center justify-between text-sm">
+                    <div>
+                      <p className="font-semibold text-text">{r.name}</p>
+                      <p className="text-xs text-gray-500">{r.urgent} urgences</p>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <span className="font-bold text-text">{r.complaints}</span>
+                      <span className="text-sm font-semibold text-emerald-600">{r.trend}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="border-2 border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-text">Top secteurs (critiques & tendance)</h3>
+                <span className="text-xs text-gray-500">Source: IA + consolidation</span>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {topSectors.map((s) => (
+                  <div key={s.name} className="py-3 flex items-center justify-between text-sm">
+                    <div>
+                      <p className="font-semibold text-text">{s.name}</p>
+                      <p className="text-xs text-gray-500">{s.critical} critiques</p>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <span className="font-bold text-text">{s.total}</span>
+                      <span className="text-sm font-semibold text-emerald-600">{s.variation}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+
+          <Card className="border-2 border-gray-200 mt-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-bold text-text">Observations IA</h3>
+                <p className="text-sm text-gray-600">Synthèse rapide des tendances à surveiller</p>
+              </div>
+              <span className="text-xs text-gray-500">Automatique</span>
+            </div>
+            <ul className="space-y-2 text-sm text-gray-700">
+              {observationsIA.map((o, idx) => (
+                <li key={idx}>• {o}</li>
+              ))}
+              </ul>
+            </Card>
+
           {/* Synthèses par secteur générées par IA */}
-          <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg">
+          <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg mt-10">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-text mb-1 flex items-center gap-3">
@@ -297,7 +358,6 @@ export default function Dashboard() {
                           </div>
                         </div>
                       </div>
-
                     </div>
 
                     {/* Action button */}
@@ -318,66 +378,6 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-
-          {/* Statistiques régionales et sectorielles (intégrées) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
-            <Card className="border-2 border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-text">Top régions (volume & urgences)</h3>
-                <span className="text-xs text-gray-500">Mise à jour: il y a 1h</span>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {topRegions.map((r) => (
-                  <div key={r.name} className="py-3 flex items-center justify-between text-sm">
-                    <div>
-                      <p className="font-semibold text-text">{r.name}</p>
-                      <p className="text-xs text-gray-500">{r.urgent} urgences</p>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="font-bold text-text">{r.complaints}</span>
-                      <span className="text-sm font-semibold text-emerald-600">{r.trend}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="border-2 border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-text">Top secteurs (critiques & tendance)</h3>
-                <span className="text-xs text-gray-500">Source: IA + consolidation</span>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {topSectors.map((s) => (
-                  <div key={s.name} className="py-3 flex items-center justify-between text-sm">
-                    <div>
-                      <p className="font-semibold text-text">{s.name}</p>
-                      <p className="text-xs text-gray-500">{s.critical} critiques</p>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="font-bold text-text">{s.total}</span>
-                      <span className="text-sm font-semibold text-emerald-600">{s.variation}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          <Card className="border-2 border-gray-200 mt-6">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-lg font-bold text-text">Observations IA</h3>
-                <p className="text-sm text-gray-600">Synthèse rapide des tendances à surveiller</p>
-              </div>
-              <span className="text-xs text-gray-500">Automatique</span>
-            </div>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {observationsIA.map((o, idx) => (
-                <li key={idx}>• {o}</li>
-              ))}
-            </ul>
-          </Card>
         </PageWrapper>
       </div>
     </div>

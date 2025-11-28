@@ -18,8 +18,8 @@ export default function Header({ showNav = false }: HeaderProps) {
                 <span className="text-white font-bold text-xl">P</span>
               </div>
               <div className="hidden md:block">
-                <h1 className="font-bold text-lg text-text">Tableau de Bord</h1>
-                <p className="text-xs text-gray-500">Pilotage Présidentiel</p>
+                <h1 className="font-bold text-lg text-text">Présidence</h1>
+                <p className="text-xs text-gray-500">Portail citoyen</p>
               </div>
             </Link>
           ) : (
@@ -32,7 +32,7 @@ export default function Header({ showNav = false }: HeaderProps) {
                 to="/dashboard"
                 className="text-sm font-medium text-text hover:text-primary transition-colors"
               >
-                Dashboard
+                Espace suivi
               </Link>
               <Link
                 to="/login"
