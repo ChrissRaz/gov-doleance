@@ -37,6 +37,12 @@ export default function Header({ showNav = false }: HeaderProps) {
                 <option value="fr">FR</option>
               </select>
               <Link
+                to="/portail"
+                className="text-sm font-medium text-text hover:text-primary transition-colors"
+              >
+                Portail
+              </Link>
+              <Link
                 to="/dashboard"
                 className="text-sm font-medium text-text hover:text-primary transition-colors"
               >

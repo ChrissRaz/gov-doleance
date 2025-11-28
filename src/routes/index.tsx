@@ -9,6 +9,7 @@ import Complaints from '../features/president/Complaints';
 import Settings from '../features/president/Settings';
 import Login from '../features/auth/Login';
 import DesignSystemPreview from '../features/design/DesignSystemPreview';
+import PortalPage from '../features/portal/PortalPage';
 
 export default function Router() {
   return (
@@ -18,6 +19,7 @@ export default function Router() {
         <Route path="/citoyens" element={<CitizenForm />} />
         <Route path="/citoyens/success" element={<CitizenSuccess />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/portail" element={<PortalPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/complaints" element={<Complaints />} />
         <Route path="/dashboard/sectors" element={<SectorView />} />
