@@ -1,6 +1,22 @@
 import React from 'react';
 import { Header, Sidebar, PageWrapper } from '../../components/layout';
-import { Card, PageTitle, Input, Button, FormGroup } from '../../components/ui';
+import { Card, PageTitle, Input, Button, FormGroup, Select } from '../../components/ui';
+
+const sectorOptions = [
+  { value: 'all', label: 'Tous secteurs' },
+  { value: 'sante', label: 'Santé' },
+  { value: 'infrastructure', label: 'Infrastructure' },
+  { value: 'education', label: 'Éducation' },
+  { value: 'energie', label: 'Énergie' },
+  { value: 'eau', label: 'Eau' },
+  { value: 'securite', label: 'Sécurité' },
+];
+
+const priorityOptions = [
+  { value: 'high', label: 'Priorité élevée' },
+  { value: 'medium', label: 'Priorité normale' },
+  { value: 'low', label: 'Priorité basse' },
+];
 
 export default function Settings() {
   return (
@@ -43,6 +59,19 @@ export default function Settings() {
               </FormGroup>
             </Card>
           </div>
+
+          <Card className="border-2 border-gray-200 mt-6">
+            <h3 className="text-lg font-bold text-text mb-2">Priorités personnalisées</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Définissez un niveau de priorité par défaut pour un secteur ou un sujet spécifique.
+            </p>
+            <FormGroup>
+              <Select label="Secteur" options={sectorOptions} defaultValue="all" />
+              <Input label="Sujet (optionnel)" placeholder="Ex: Rupture de médicaments, RN7, cyberattaque..." />
+              <Select label="Niveau de priorité" options={priorityOptions} defaultValue="medium" />
+              <Button variant="primary">Appliquer la priorité</Button>
+            </FormGroup>
+          </Card>
 
           <Card className="border-2 border-gray-200 mt-6">
             <h3 className="text-lg font-bold text-text mb-2">Sécurité</h3>
