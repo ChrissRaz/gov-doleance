@@ -1,384 +1,473 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Header, Sidebar, PageWrapper } from '../../components/layout';
-import { PageTitle, Card } from '../../components/ui';
 
-const stats = [
+const MuiPerson = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+  </svg>
+);
+
+const MuiSearch = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5L20.49 19l-5-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+  </svg>
+);
+
+const overview = [
   {
-    label: 'Doléances totales',
-    value: '1,234',
+    label: 'Total plaintes',
+    value: '12 847',
     trend: '+12%',
-    trendPositive: true,
+    trendColor: 'text-[#1db67f]',
+    iconBg: 'bg-gradient-to-br from-emerald-400 to-teal-500',
     icon: (
-      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
     ),
-    bgGradient: 'from-blue-500 to-blue-600'
   },
   {
-    label: 'Urgentes',
-    value: '45',
-    trend: '-3%',
-    trendPositive: false,
+    label: 'Cas urgents',
+    value: '342',
+    trend: '-4%',
+    trendColor: 'text-[#e74c3c]',
+    iconBg: 'bg-gradient-to-br from-red-400 to-rose-500',
     icon: (
-      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
       </svg>
     ),
-    bgGradient: 'from-red-500 to-red-600'
-  },
-];
-
-// Synthèses consolidées par l'IA, regroupées par secteur
-const sectorInsights = [
-  {
-    id: 1,
-    sector: 'Santé',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    ),
-    complaintsCount: 87,
-    topRegion: 'Analamanga',
-    summary: 'Pénurie de médicaments essentiels dans 15 centres de santé. Manque de personnel médical dans les zones rurales. Équipements obsolètes nécessitant remplacement.',
-    urgency: 'high',
-    trend: '+23%',
-    trendPositive: false,
   },
   {
-    id: 2,
-    sector: 'Infrastructure',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-      </svg>
-    ),
-    complaintsCount: 134,
-    topRegion: 'Vakinankaratra',
-    summary: 'Routes nationales 7 et 34 en état critique. 8 ponts nécessitant réparation urgente. Problèmes d\'accès à l\'eau potable dans 22 communes.',
-    urgency: 'high',
-    trend: '+15%',
-    trendPositive: false,
-  },
-  {
-    id: 3,
-    sector: 'Éducation',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
-    complaintsCount: 56,
-    topRegion: 'Haute Matsiatra',
-    summary: 'Manque de tables-bancs dans 34 écoles primaires. Pénurie d\'enseignants qualifiés en mathématiques et sciences. Infrastructures scolaires vétustes.',
-    urgency: 'medium',
+    label: 'Santé',
+    value: '3 245',
+    subtitle: 'Plaintes #1',
     trend: '+8%',
-    trendPositive: false,
-  },
-  {
-    id: 4,
-    sector: 'Agriculture',
+    trendColor: 'text-[#1db67f]',
+    iconBg: 'bg-gradient-to-br from-pink-400 to-rose-500',
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     ),
-    complaintsCount: 43,
-    topRegion: 'Alaotra Mangoro',
-    summary: 'Difficulté d\'accès aux semences améliorées. Systèmes d\'irrigation défaillants affectant 12 périmètres rizicoles. Besoin de formation technique moderne.',
-    urgency: 'medium',
-    trend: '-5%',
-    trendPositive: true,
+  },
+  {
+    label: 'Éducation',
+    value: '2 891',
+    subtitle: 'Plaintes #2',
+    trend: '-8%',
+    trendColor: 'text-[#e74c3c]',
+    iconBg: 'bg-gradient-to-br from-blue-400 to-indigo-500',
+    icon: (
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Infrastructure',
+    value: '2 456',
+    subtitle: 'Plaintes #3',
+    trend: '-15%',
+    trendColor: 'text-[#e74c3c]',
+    iconBg: 'bg-gradient-to-br from-orange-400 to-amber-500',
+    icon: (
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Antananarivo',
+    value: '4 532',
+    subtitle: 'Région active #1',
+    trend: '+12%',
+    trendColor: 'text-[#1db67f]',
+    iconBg: 'bg-gradient-to-br from-purple-400 to-violet-500',
+    icon: (
+      <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
   },
 ];
 
-const urgencyColors: Record<string, string> = {
-  high: 'text-red-700 bg-red-50 border-red-200',
-  medium: 'text-yellow-700 bg-yellow-50 border-yellow-200',
-  low: 'text-blue-700 bg-blue-50 border-blue-200',
-};
-
-const urgencyLabels: Record<string, string> = {
-  high: 'Urgence élevée',
-  medium: 'Urgence moyenne',
-  low: 'Urgence faible',
-};
-
-const topRegions = [
-  { name: 'Analamanga', complaints: 640, urgent: 210, trend: '+9%' },
-  { name: 'Vakinankaratra', complaints: 420, urgent: 155, trend: '+12%' },
-  { name: 'Haute Matsiatra', complaints: 310, urgent: 98, trend: '+6%' },
-  { name: 'Androy', complaints: 260, urgent: 120, trend: '+14%' },
-  { name: 'SAVA', complaints: 190, urgent: 65, trend: '+4%' },
+const alerts = [
+  {
+    level: 'Urgent',
+    color: '#b02d2f',
+    icon: (
+      <svg className="h-5 w-5 text-[#b02d2f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    ),
+    title: 'Pic de plaintes - Antananarivo',
+    subtitle: 'Augmentation de 45% des plaintes santé cette semaine',
+  },
+  {
+    level: 'Elevé',
+    color: '#f3a63c',
+    icon: (
+      <svg className="h-5 w-5 text-[#f3a63c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 13h16M4 9h16M4 17h16" />
+      </svg>
+    ),
+    title: 'Infrastructure - Toamasina',
+    subtitle: 'Route nationale 2 : 234 signalements en 3 jours',
+  },
+  {
+    level: 'Info',
+    color: '#3b82f6',
+    icon: (
+      <svg className="h-5 w-5 text-[#3b82f6]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 12v4m0-8h.01M12 5a7 7 0 100 14 7 7 0 000-14z" />
+      </svg>
+    ),
+    title: 'Tendance positive - Fianarantsoa',
+    subtitle: 'Réduction de 18% des plaintes éducation',
+  },
 ];
 
-const topSectors = [
-  { name: 'Infrastructure', total: 980, critical: 320, variation: '+15%' },
-  { name: 'Santé', total: 870, critical: 240, variation: '+12%' },
-  { name: 'Éducation', total: 540, critical: 110, variation: '+8%' },
-  { name: 'Énergie', total: 410, critical: 95, variation: '+6%' },
-  { name: 'Eau', total: 360, critical: 140, variation: '+10%' },
+const actions = [
+  {
+    level: 'Haute',
+    color: '#f97316',
+    title: 'Renforcer centres de santé - Antananarivo',
+    sector: 'Santé',
+    text: 'Déployer 15 médecins supplémentaires et 500 kits médicaux dans les CSB les plus sollicités. Budget estimé: 450M Ar.',
+  },
+  {
+    level: 'Urgent',
+    color: '#b02d2f',
+    title: 'Programme urgence routes - Toamasina',
+    sector: 'Infrastructure',
+    text: 'Lancer travaux réparation RN2 avec 3 équipes simultanées. Priorité aux tronçons les plus critiques identifiés.',
+  },
+  {
+    level: 'Moyenne',
+    color: '#3b82f6',
+    title: 'Recrutement enseignants - Zones rurales',
+    sector: 'Éducation',
+    text: 'Ouvrir 250 postes d\'enseignants avec incitations financières pour zones reculées. Formation accélérée 3 mois.',
+  },
+  {
+    level: 'Moyenne',
+    color: '#3b82f6',
+    title: 'Aide agricole - Fianarantsoa',
+    sector: 'Agriculture',
+    text: 'Distribuer semences résistantes et former 1000 agriculteurs aux techniques irrigation économes.',
+  },
 ];
 
-const observationsIA = [
-  'Infrastructure reste la source principale de critiques (+15% ce mois).',
-  'Santé : tension sur les stocks médicamenteux en Analamanga et Androy.',
-  'Énergie : coupures prolongées affectent 60k personnes, hausse des doléances.',
-  'Risque pluvieux : prévoyez un pic infrastructure/électricité les 2 prochaines semaines.',
+const sectors = [
+  {
+    title: 'Santé',
+    value: '3 245',
+    trend: '-12%',
+    trendColor: '#b02d2f',
+    desc: 'Manque de médicaments et équipements dans les centres de santé de base. Principaux problèmes: accès limité aux soins, personnel insuffisant.',
+    evo: '+12%',
+    icon: (
+      <svg className="h-6 w-6 text-[#b02d2f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-8-4.5-8-10a8 8 0 0116 0c0 5.5-8 10-8 10z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 10h6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v6" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Éducation',
+    value: '2 891',
+    trend: '-8%',
+    trendColor: '#b02d2f',
+    desc: 'Infrastructure scolaire défaillante et manque d\'enseignants qualifiés. Focus sur zones rurales avec classes surchargées.',
+    evo: '+8%',
+    icon: (
+      <svg className="h-6 w-6 text-[#1f2937]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5 12.083 12.083 0 015.84 10.578L12 14z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Infrastructure',
+    value: '2 456',
+    trend: '-15%',
+    trendColor: '#b02d2f',
+    desc: 'Routes dégradées et ponts dangereux. Problèmes d\'accès dans 12 régions, impact sur transport et commerce.',
+    evo: '+15%',
+    icon: (
+      <svg className="h-6 w-6 text-[#b02d2f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16M7 21h10" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 3h8" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Agriculture',
+    value: '1 872',
+    trend: '+5%',
+    trendColor: '#0a9b7a',
+    desc: 'Sécheresse et ravageurs affectent récoltes. Demandes d\'aide semencière et irrigation en hausse.',
+    evo: '-5%',
+    icon: (
+      <svg className="h-6 w-6 text-[#0a9b7a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0-4 2-8 6-10a8 8 0 00-12 0c4 2 6 6 6 10z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 12a4 4 0 014-4 4 4 0 00-4-4 4 4 0 00-4 4 4 4 0 014 4z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Sécurité',
+    value: '1 234',
+    trend: '-3%',
+    trendColor: '#0a9b7a',
+    desc: 'Vols de bétail et insécurité dans zones reculées. Demande de renforcement des forces de l\'ordre.',
+    evo: '+3%',
+    icon: (
+      <svg className="h-6 w-6 text-[#0a9b7a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5.5 21a6.5 6.5 0 0113 0" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Administration',
+    value: '1 149',
+    trend: '-2%',
+    trendColor: '#b02d2f',
+    desc: 'Lenteurs administratives et corruption dans services publics. Focus sur délivrance documents officiels.',
+    evo: '+2%',
+    icon: (
+      <svg className="h-6 w-6 text-[#0f172a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 16h4" />
+      </svg>
+    ),
+  },
 ];
-
-const slugify = (value: string) =>
-  value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '-');
 
 export default function Dashboard() {
-  const navigate = useNavigate();
-
-  const handleSectorClick = (sectorName: string) => {
-    navigate(`/dashboard/sector/${slugify(sectorName)}`);
-  };
-
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-background via-white to-background">
-      <Sidebar />
-      <div className="flex-1">
-        <Header />
-        <PageWrapper maxWidth="full">
-          {/* Header avec gradient et meilleure hiérarchie */}
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-text mb-2">
-              Vue d'ensemble
-            </h1>
-            <p className="text-base md:text-lg text-gray-600">
-              Suivez l'évolution des doléances en temps réel
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGg4di04aC04djh6bTAtOGg4di04aC04djh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+          <div>
+            <h1 className="text-2xl font-bold text-white tracking-tight">Tableau Présidentiel</h1>
+            <p className="text-sm text-emerald-200 mt-1 flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2a7 7 0 00-7 7c0 5.67 7 11 7 11s7-5.33 7-11a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+              </svg>
+              République de Madagascar
             </p>
           </div>
+          <div className="flex items-center gap-4">
+            <button className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-200 hover:scale-105">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+              Personnaliser
+            </button>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-blue-500 text-white shadow-lg ring-2 ring-white/20">
+              <MuiPerson className="h-6 w-6" />
+            </div>
+          </div>
+        </div>
+      </div>
 
-          {/* Statistiques avec cartes améliorées */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {stats.map((stat, index) => (
+      <div className="mx-auto max-w-7xl px-6 pb-12">
+        <div className="py-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-slate-900">Vue d'ensemble</h2>
+            <div className="text-sm text-slate-500">Dernière mise à jour: il y a 5 min</div>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {overview.map((item, index) => (
               <div
-                key={index}
-                className="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                key={item.label}
+                className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-slate-200/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">
-                      {stat.label}
-                    </p>
-                    <p className="text-4xl font-bold text-text mb-2">
-                      {stat.value}
-                    </p>
-                    <div className="flex items-center gap-1">
-                      <svg
-                        className={`w-4 h-4 ${stat.trendPositive ? 'text-green-600' : 'text-red-600'}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d={stat.trendPositive ? 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' : 'M13 17h8m0 0V9m0 8l-8-8-4 4-6-6'}
-                        />
-                      </svg>
-                      <span className={`text-sm font-bold ${stat.trendPositive ? 'text-green-600' : 'text-red-600'}`}>
-                        {stat.trend}
-                      </span>
-                      <span className="text-xs text-gray-500 ml-1">ce mois</span>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-slate-100/50 to-transparent rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className={`${item.iconBg} rounded-xl p-2.5 shadow-lg`}>
+                      {item.icon}
+                    </div>
+                    <span className={`text-sm font-bold ${item.trendColor} bg-gradient-to-r ${item.trendColor === 'text-[#1db67f]' ? 'from-emerald-50 to-green-50' : 'from-red-50 to-orange-50'} px-2.5 py-1 rounded-lg`}>
+                      {item.trend}
+                    </span>
+                  </div>
+                  <p className="text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">{item.value}</p>
+                  <p className="text-sm font-semibold text-slate-700">{item.label}</p>
+                  {item.subtitle && <p className="text-xs text-slate-500 mt-1">{item.subtitle}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          {/* Alertes */}
+          <div>
+            <div className="mb-5 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-slate-900">Alertes prioritaires</h3>
+              <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
+                <MuiSearch className="h-4 w-4" /> Filtre
+              </button>
+            </div>
+            <div className="space-y-3">
+              {alerts.map((alert, index) => (
+                <div
+                  key={alert.title}
+                  className="group relative overflow-hidden flex items-start justify-between rounded-2xl border border-slate-200/60 bg-white p-5 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative flex items-start gap-4">
+                    <div
+                      className="rounded-xl p-2.5 shadow-sm"
+                      style={{ backgroundColor: `${alert.color}15` }}
+                    >
+                      {alert.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900 mb-1">{alert.title}</p>
+                      <p className="text-xs text-slate-600 leading-relaxed">{alert.subtitle}</p>
                     </div>
                   </div>
-                  <div className={`w-16 h-16 bg-gradient-to-br ${stat.bgGradient} rounded-xl flex items-center justify-center shadow-md`}>
-                    {stat.icon}
+                  <span
+                    className="relative shrink-0 inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-bold"
+                    style={{ background: `${alert.color}15`, color: alert.color, border: `1.5px solid ${alert.color}40` }}
+                  >
+                    {alert.level}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Suggestions */}
+          <div>
+            <div className="mb-5 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-slate-900">Suggestions d'actions</h3>
+              <button className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1">
+                Voir plus
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+            <div className="space-y-3">
+              {actions.map((action, index) => (
+                <div
+                  key={action.title}
+                  className="group relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    borderColor: `${action.color}40`,
+                    animationDelay: `${index * 100}ms`
+                  }}
+                >
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b" style={{ background: `linear-gradient(to bottom, ${action.color}, ${action.color}80)` }} />
+                  <div className="flex items-start justify-between mb-3">
+                    <span
+                      className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold"
+                      style={{ background: `${action.color}15`, color: action.color, border: `1.5px solid ${action.color}40` }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: action.color }} />
+                      {action.level}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                      </svg>
+                      IA
+                    </span>
+                  </div>
+                  <p className="text-base font-bold text-slate-900 mb-1">{action.title}</p>
+                  <p className="text-xs font-semibold text-slate-500 mb-3">{action.sector}</p>
+                  <p className="text-sm text-slate-700 leading-relaxed">{action.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Plaintes par secteur */}
+        <div className="mt-10">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold text-slate-900">Plaintes par secteur</h3>
+            <button className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 4h18M3 12h18M3 20h18" />
+              </svg>
+              Tout voir
+            </button>
+          </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {sectors.map((sector, index) => (
+              <div
+                key={sector.title}
+                className="group relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-slate-100/40 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 p-2.5 shadow-sm">
+                        {sector.icon}
+                      </div>
+                      <p className="text-base font-bold text-slate-900">{sector.title}</p>
+                    </div>
+                    <span
+                      className="text-sm font-bold px-2.5 py-1 rounded-lg"
+                      style={{
+                        color: sector.trendColor,
+                        backgroundColor: `${sector.trendColor}15`
+                      }}
+                    >
+                      {sector.trend}
+                    </span>
+                  </div>
+                  <p className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">{sector.value}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4">{sector.desc}</p>
+                  <div className="flex items-center justify-between text-xs font-semibold text-slate-500 mb-2.5">
+                    <span>Évolution 30j</span>
+                    <span className="text-slate-700">{sector.evo}</span>
+                  </div>
+                  <div className="relative h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-2 rounded-full transition-all duration-1000 ease-out"
+                      style={{
+                        width: '65%',
+                        background: `linear-gradient(to right, ${sector.trendColor}, ${sector.trendColor}cc)`
+                      }}
+                    />
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </div>
 
-
-          {/* Statistiques régionales et sectorielles (intégrées) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
-            <Card className="border-2 border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-text">Top régions (volume & urgences)</h3>
-                <span className="text-xs text-gray-500">Mise à jour: il y a 1h</span>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {topRegions.map((r) => (
-                  <div key={r.name} className="py-3 flex items-center justify-between text-sm">
-                    <div>
-                      <p className="font-semibold text-text">{r.name}</p>
-                      <p className="text-xs text-gray-500">{r.urgent} urgences</p>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="font-bold text-text">{r.complaints}</span>
-                      <span className="text-sm font-semibold text-emerald-600">{r.trend}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="border-2 border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-text">Top secteurs (critiques & tendance)</h3>
-                <span className="text-xs text-gray-500">Source: IA + consolidation</span>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {topSectors.map((s) => (
-                  <div key={s.name} className="py-3 flex items-center justify-between text-sm">
-                    <div>
-                      <p className="font-semibold text-text">{s.name}</p>
-                      <p className="text-xs text-gray-500">{s.critical} critiques</p>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="font-bold text-text">{s.total}</span>
-                      <span className="text-sm font-semibold text-emerald-600">{s.variation}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
+      <div className="relative overflow-hidden bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-900">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDEzNGg4di04aC04djh6bTAtOGg4di04aC04djh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-40" />
+        <div className="relative px-6 py-6 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-emerald-300" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <p className="text-sm font-bold text-emerald-100">Informations générées par IA</p>
           </div>
-
-          <Card className="border-2 border-gray-200 mt-6">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-lg font-bold text-text">Observations IA</h3>
-                <p className="text-sm text-gray-600">Synthèse rapide des tendances à surveiller</p>
-              </div>
-              <span className="text-xs text-gray-500">Automatique</span>
-            </div>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {observationsIA.map((o, idx) => (
-                <li key={idx}>• {o}</li>
-              ))}
-              </ul>
-            </Card>
-
-          {/* Synthèses par secteur générées par IA */}
-          <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg mt-10">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-text mb-1 flex items-center gap-3">
-                  <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                  Synthèse par secteur
-                </h2>
-                <p className="text-sm text-gray-600">
-                  Analyse consolidée et automatisée des doléances
-                </p>
-              </div>
-              <button className="hidden md:flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary font-semibold rounded-lg hover:bg-primary/20 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
-                Tous les secteurs
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {sectorInsights.map((insight) => (
-                <div
-                  key={insight.id}
-                  onClick={() => handleSectorClick(insight.sector)}
-                  className="border-2 border-gray-200 rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer"
-                >
-                  <div className="flex flex-col lg:flex-row lg:items-start gap-5">
-                    {/* En-tête du secteur */}
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center text-white shadow-md">
-                            {insight.icon}
-                          </div>
-                          <div>
-                            <div className="flex flex-wrap items-center gap-2 mb-2">
-                              <h3 className="font-bold text-xl text-text">
-                                {insight.sector}
-                              </h3>
-                              <span className="inline-flex items-center rounded-full border-2 border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-800">
-                                {insight.complaintsCount} doléances
-                              </span>
-                              <span className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-xs font-bold ${urgencyColors[insight.urgency]}`}>
-                                {urgencyLabels[insight.urgency]}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <div className="flex items-center gap-1">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <span className="font-medium">Région principale: {insight.topRegion}</span>
-                              </div>
-                              <span className="text-gray-400">•</span>
-                              <div className="flex items-center gap-1">
-                                <svg
-                                  className={`w-4 h-4 ${insight.trendPositive ? 'text-green-600' : 'text-red-600'}`}
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d={insight.trendPositive ? 'M13 17h8m0 0V9m0 8l-8-8-4 4-6-6' : 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'}
-                                  />
-                                </svg>
-                                <span className={`font-bold ${insight.trendPositive ? 'text-green-600' : 'text-red-600'}`}>
-                                  {insight.trend} ce mois
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Synthèse automatique */}
-                      <div className="w-full bg-gradient-to-r from-gray-50 to-blue-50 border-2 border-gray-200 rounded-lg p-4 mb-4">
-                        <div className="flex items-start gap-2 mb-2">
-                          <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                          </svg>
-                          <div className="flex-1">
-                            <p className="text-xs font-bold text-primary uppercase tracking-wide mb-1">Synthèse automatique</p>
-                            <p className="text-sm text-gray-700 leading-relaxed">
-                              {insight.summary}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleSectorClick(insight.sector);
-                      }}
-                      className="lg:self-center px-5 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                      Analyser secteur
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </PageWrapper>
+          <p className="text-xs text-emerald-200 max-w-3xl mx-auto leading-relaxed">
+            Ces suggestions sont informatives et basées sur l'analyse automatique des données. Elles nécessitent une validation approfondie avant toute mise en œuvre.
+          </p>
+        </div>
       </div>
     </div>
   );
