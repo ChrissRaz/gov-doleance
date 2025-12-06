@@ -66,15 +66,15 @@ export default function PortalPage() {
             <h2 className="text-2xl font-bold text-text">Les services les plus populaires</h2>
             <p className="text-sm text-gray-600">Les services publics les plus recherchés par les citoyens</p>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-nowrap gap-4 overflow-x-auto pb-2">
             {popularServices.map((service) => (
               <Link
                 key={service.title}
                 to={service.to || '#'}
-                className="bg-[#81c6f7] text-[#0b2942] rounded-2xl px-5 py-4 shadow-md min-w-[230px] flex-1 sm:flex-initial hover:translate-y-[-2px] transition-transform"
+                className="bg-[#d7f3f0] text-[#0f2b38] rounded-2xl px-5 py-4 shadow-md min-w-[240px] flex-1 sm:flex-initial hover:translate-y-[-2px] transition-transform border border-[#c5eae3]"
               >
                 <p className="font-semibold mb-3">{service.title}</p>
-                <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-[#c8efe1] text-[#0a5c46] border border-[#a6e0cf]">
+                <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-[#e8fbf3] text-[#0a5c46] border border-[#b8ead6]">
                   {service.tag}
                 </span>
               </Link>

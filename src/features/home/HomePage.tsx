@@ -1,221 +1,287 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Header, PageWrapper } from '../../components/layout';
+const heroBackground = '/assets/hero-palace.jpeg';
+const seal = '/assets/republique.png';
+
+const pillars = [
+  {
+    title: 'Fiable & Sécurisée',
+    description: 'Vos données sont protégées.',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4l8 4v5c0 5-3.58 8-8 8s-8-3-8-8V8l8-4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+      </svg>
+    ),
+    color: 'from-blue-500 to-blue-600',
+  },
+  {
+    title: 'Transparente',
+    description: 'Suivi clair de vos envois.',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
+    ),
+    color: 'from-purple-500 to-purple-600',
+  },
+  {
+    title: 'Écoute active',
+    description: 'Chaque message est lu et classé.',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 11h6" />
+      </svg>
+    ),
+    color: 'from-emerald-500 to-teal-600',
+  },
+];
+
+const steps = [
+  {
+    title: 'Accédez au formulaire',
+    description: 'Remplissez directement le formulaire en ligne, sans inscription préalable.',
+    tag: 'Étape 01',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4l-2 4h4l-2 4" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 20h16" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Exprimez vos besoins ou problèmes',
+    description: 'Partagez votre message en toute liberté et confidentialité.',
+    tag: 'Étape 02',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h8m-8 4h5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Votre doléance est traitée avec attention',
+    description: 'Nos équipes analysent et classent chaque doléance par thème et priorité.',
+    tag: 'Étape 03',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Suivi des priorités et retour d’information',
+    description: 'Recevez un email de confirmation avec les détails de votre doléance.',
+    tag: 'Étape 04',
+    icon: (
+      <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
+      </svg>
+    ),
+  },
+];
+
+const commitments = [
+  {
+    title: 'Confirmation par email',
+    description: 'Recevez un email de confirmation avec les détails de votre doléance.',
+  },
+  {
+    title: 'Participation citoyenne active',
+    description: 'Contribuez directement aux décisions qui façonnent l’avenir de votre communauté.',
+  },
+  {
+    title: 'Voix directe vers la Présidence',
+    description: 'Vos préoccupations remontent aux plus hautes instances de l’État.',
+  },
+];
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-      <Header showNav variant="citizen" />
+    <div className="bg-white text-gray-900">
+      {/* Hero */}
+      <div className="relative isolate overflow-hidden">
+        <img
+          src={heroBackground}
+          alt="Palais de la Présidence"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c2143]/95 via-[#0c2143]/88 to-[#0b8a65]/75" />
 
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-green-500/10" />
-
-        {/* Decorative circles */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
-
-        <PageWrapper maxWidth="xl" className="relative">
-          <div className="py-12 md:py-20">
-            {/* En-tête principale */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 bg-white border-2 border-primary/30 rounded-full px-6 py-3 mb-8 shadow-xl">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-green-600 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-white font-bold text-lg">🇲🇬</span>
-                </div>
-                <span className="text-sm font-bold text-primary uppercase tracking-wide">Fandraisana feo ho an’ny vahoaka</span>
-              </div>
-
-              <h1 className="text-4xl md:text-6xl font-bold text-text mb-6 leading-tight">
-                Miresaha mivantana amin’ny Fiadidian’ny Repoblika
-              </h1>
-
-              <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
-                Zava-dehibe ny feonao amin’ny fanorenana <span className="font-bold text-green-600">Madagasikara tsara kokoa</span>.
-                Ampitapeo mivantana ny olana sy ny soso-kevitrao.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link to="/citoyens">
-                  <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-[1.05] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                    Mametraka fitarainana
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Statistiques d'impact */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              {[
-                {
-                  number: '1,234',
-                  label: 'Fitarainana voaray',
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  ),
-                  gradient: 'from-blue-500 to-blue-600',
-                  bgGradient: 'from-blue-50 to-blue-100/50'
-                },
-                {
-                  number: '678',
-                  label: 'Olana voavaha',
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  ),
-                  gradient: 'from-green-500 to-green-600',
-                  bgGradient: 'from-green-50 to-green-100/50'
-                },
-                {
-                  number: '22',
-                  label: 'Faritra voarakotra',
-                  icon: (
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  ),
-                  gradient: 'from-purple-500 to-purple-600',
-                  bgGradient: 'from-purple-50 to-purple-100/50'
-                }
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className={`bg-gradient-to-br ${stat.bgGradient} border-2 border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center text-white shadow-md`}>
-                      {stat.icon}
-                    </div>
-                  </div>
-                  <p className="text-4xl font-bold text-text mb-2">{stat.number}</p>
-                  <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Comment ça marche */}
-            <div className="bg-gradient-to-br from-white via-blue-50/30 to-green-50/30 border-2 border-gray-200 rounded-2xl p-8 md:p-12 shadow-xl mb-16">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-                  Ahoana no fiasan’izany ?
-                </h2>
-                <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                  Dingana tsotra sy mangarahara ahafahan’ny feonao tonga any amin’ny tompon’andraikitra
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  {
-                    step: '1',
-                    title: 'Alefaso ny fitarainana',
-                    description: 'Fenoy ny taratasy amin’ny antsipiriany fohy. Tsotra sy haingana.',
-                    icon: (
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                      </svg>
-                    ),
-                    color: 'bg-gradient-to-br from-blue-500 to-blue-600',
-                    iconColor: 'text-blue-600'
-                  },
-                  {
-                    step: '2',
-                    title: 'Famakafakana mandeha ho azy',
-                    description: 'Rafitra IA manasokajy araka ny sehatra sy ny haavon’ny filàna maika.',
-                    icon: (
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    ),
-                    color: 'bg-gradient-to-br from-yellow-500 to-orange-500',
-                    iconColor: 'text-orange-600'
-                  },
-                  {
-                    step: '3',
-                    title: 'Fandraisana andraikitra',
-                    description: 'Ny sampan-draharaha voakasika no mandinika sy mandrafitra hetsika.',
-                    icon: (
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ),
-                    color: 'bg-gradient-to-br from-green-500 to-green-600',
-                    iconColor: 'text-green-600'
-                  }
-                ].map((item) => (
-                  <div key={item.step} className="relative">
-                    <div className="flex flex-col items-center text-center">
-                      <div className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4`}>
-                        {item.step}
-                      </div>
-                      <div className={`mb-3 ${item.iconColor}`}>
-                        {item.icon}
-                      </div>
-                      <h3 className="text-xl font-bold text-text mb-3">{item.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Secteurs couverts */}
-            <div className="bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary/20 rounded-2xl p-8 md:p-12 shadow-lg">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                  Sehatra rehetra raisina
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Na inona na inona olana taterinao dia henoinay
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { name: 'Fahasalamana', icon: '🏥' },
-                  { name: 'Rafitra fototra', icon: '🏗️' },
-                  { name: 'Fanabeazana', icon: '📚' },
-                  { name: 'Fambolena', icon: '🌾' },
-                  { name: 'Herinaratra', icon: '⚡' },
-                  { name: 'Rano', icon: '💧' },
-                  { name: 'Fiarovana', icon: '🛡️' },
-                  { name: 'Tontolo iainana', icon: '🌱' }
-                ].map((sector) => (
-                  <div
-                    key={sector.name}
-                    className="bg-white border-2 border-gray-200 rounded-xl p-4 text-center hover:border-primary/40 hover:shadow-md transition-all duration-200"
-                  >
-                    <div className="text-3xl mb-2">{sector.icon}</div>
-                    <p className="font-semibold text-text">{sector.name}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Final */}
-            <div className="text-center mt-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-text mb-6">
-                Prêt à faire entendre votre voix ?
-              </h2>
-              <Link to="/citoyens">
-                <button className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white font-bold text-lg py-5 px-10 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 mx-auto">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                  Déposer votre doléance maintenant
-                </button>
-              </Link>
+        <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-28">
+          <div className="mb-10 flex items-center gap-4">
+            <img src={seal} alt="Armoiries de Madagascar" className="h-16 w-16 object-contain" />
+            <div className="text-white">
+              <p className="text-xs font-semibold tracking-[0.25em]">REPOBLIKAN’I</p>
+              <p className="text-xl font-bold">MADAGASCARA</p>
             </div>
           </div>
-        </PageWrapper>
+
+          <div className="max-w-3xl space-y-6 text-white">
+            <h1 className="text-4xl font-bold leading-tight md:text-6xl">
+              Écrire au Président de la République de Madagascar
+            </h1>
+            <p className="text-lg leading-relaxed text-white/80 md:text-xl">
+              Votre message peut changer les choses. Grâce à cette plateforme officielle, chaque citoyen
+              peut désormais faire entendre sa voix, en toute sécurité.
+            </p>
+            <Link to="/citoyens" className="inline-flex">
+              <button className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 px-8 py-3 font-semibold text-white shadow-xl shadow-emerald-900/30 transition duration-200 hover:-translate-y-0.5">
+                Partager maintenant
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition duration-200 group-hover:bg-white/25">
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
+
+      {/* Valeurs */}
+      <section className="mx-auto max-w-6xl px-6 pt-12 pb-10">
+        <div className="mb-10 space-y-3 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Cette initiative renforce le lien direct entre le peuple et le sommet de l’État.
+          </h2>
+          <p className="text-base text-gray-600 md:text-lg">
+            Elle garantit que chaque doléance reçue est analysée, catégorisée et prise en compte dans les décisions
+            de gouvernance.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {pillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(12,33,67,0.08)]"
+            >
+              <div className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${pillar.color}`}>
+                {pillar.icon}
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-gray-900">{pillar.title}</h3>
+              <p className="text-gray-600">{pillar.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Étapes */}
+      <section className="mx-auto max-w-6xl px-6 py-12">
+        <h2 className="mb-4 text-center text-2xl font-bold text-gray-900 md:text-3xl">Comment ça marche ?</h2>
+        <div className="relative z-0 mt-12">
+          <div className="absolute left-9 top-0 z-0 h-full w-[3px] rounded-full bg-gradient-to-b from-emerald-500 via-emerald-400 to-teal-500 shadow-[0_0_24px_rgba(16,185,129,0.35)] md:left-1/2 md:w-[4px] md:-translate-x-1/2" />
+
+          <div className="space-y-12">
+            {steps.map((step, index) => {
+              const isLeft = index % 2 === 0;
+
+              return (
+                <div key={step.title} className="grid grid-cols-1 items-center gap-6 md:grid-cols-[1fr_auto_1fr]">
+                  {isLeft ? (
+                    <>
+                      <div className="relative md:pr-16">
+                        <div className="mb-4 flex justify-center md:hidden">
+                          <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-[0_18px_45px_rgba(16,185,129,0.3)]">
+                            {step.icon}
+                          </div>
+                        </div>
+
+                        <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(12,33,67,0.08)]">
+                          <div className="mb-3 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                            {step.tag}
+                          </div>
+                          <h3 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h3>
+                          <p className="leading-relaxed text-gray-600">{step.description}</p>
+                        </div>
+                      </div>
+
+                      <div className="hidden md:flex md:justify-center">
+                        <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-[0_18px_45px_rgba(16,185,129,0.3)]">
+                          {step.icon}
+                        </div>
+                      </div>
+
+                      <div className="hidden md:block" />
+                    </>
+                  ) : (
+                    <>
+                      <div className="hidden md:block" />
+
+                      <div className="hidden md:flex md:justify-center">
+                        <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-[0_18px_45px_rgba(16,185,129,0.3)]">
+                          {step.icon}
+                        </div>
+                      </div>
+
+                      <div className="relative md:pl-16 md:text-right">
+                        <div className="mb-4 flex justify-center md:hidden">
+                          <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-[0_18px_45px_rgba(16,185,129,0.3)]">
+                            {step.icon}
+                          </div>
+                        </div>
+
+                        <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(12,33,67,0.08)]">
+                          <div className="mb-3 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                            {step.tag}
+                          </div>
+                          <h3 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h3>
+                          <p className="leading-relaxed text-gray-600">{step.description}</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Engagements */}
+      <section className="bg-gradient-to-r from-[#0b8a65] to-[#0c2143] text-white">
+        <div className="mx-auto max-w-6xl px-6 py-14 space-y-10">
+          <div className="space-y-3 text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">
+              Cette initiative renforce le lien direct entre le peuple et le sommet de l’État.
+            </h2>
+            <p className="text-base text-white/80 md:text-lg">
+              Elle garantit que chaque doléance reçue est analysée, catégorisée et prise en compte dans les décisions
+              de gouvernance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {commitments.map((commitment) => (
+              <div
+                key={commitment.title}
+                className="rounded-2xl bg-white p-6 text-gray-900 shadow-[0_25px_60px_rgba(0,0,0,0.18)]"
+              >
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 text-white">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-lg font-semibold">{commitment.title}</h3>
+                <p className="text-gray-600">{commitment.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-4 pt-4">
+            <img src={seal} alt="Armoiries de Madagascar" className="h-16 w-16 object-contain" />
+            <div>
+              <p className="text-xs font-semibold tracking-[0.25em]">REPOBLIKAN’I</p>
+              <p className="text-xl font-bold">MADAGASCARA</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
