@@ -254,22 +254,22 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20">
       <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGg4di04aC04djh6bTAtOGg4di04aC04djh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-6 pl-20 lg:pl-6 py-6">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Tableau Présidentiel</h1>
-            <p className="text-sm text-emerald-200 mt-1 flex items-center gap-2">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Tableau Présidentiel</h1>
+            <p className="text-xs sm:text-sm text-emerald-200 mt-1 flex items-center gap-2">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2a7 7 0 00-7 7c0 5.67 7 11 7 11s7-5.33 7-11a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
               </svg>
               République de Madagascar
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-200 hover:scale-105">
+          <div className="flex items-center gap-3">
+            <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 px-3 sm:px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-200 hover:scale-105">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
-              Personnaliser
+              <span className="hidden sm:inline">Personnaliser</span>
             </button>
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-blue-500 text-white shadow-lg ring-2 ring-white/20">
               <MuiPerson className="h-6 w-6" />

@@ -25,7 +25,7 @@ export default function Select({
       )}
       <select
         className={classNames(
-          'px-4 py-2 border rounded-lg outline-none transition-all duration-200',
+          'pl-4 pr-[21px] py-2 border rounded-lg outline-none transition-all duration-200',
           'focus:ring-2 focus:ring-primary/50 focus:border-primary',
           error ? 'border-red-500' : 'border-gray-300',
           'disabled:bg-gray-100 disabled:cursor-not-allowed',

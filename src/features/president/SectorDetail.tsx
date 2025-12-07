@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Header, Sidebar, PageWrapper } from '../../components/layout';
+import { Header, PageWrapper } from '../../components/layout';
 import { Badge } from '../../components/ui';
 
 // Données simulées - à remplacer par API

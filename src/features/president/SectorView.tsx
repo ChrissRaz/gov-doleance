@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Header, Sidebar, PageWrapper } from '../../components/layout';
+import { Header, PageWrapper } from '../../components/layout';
 import { PageTitle, Select } from '../../components/ui';
 
 type Severity = 'critique' | 'elevee' | 'moyenne';
@@ -97,14 +97,12 @@ export default function SectorView() {
   );
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-background to-white">
-      <Sidebar />
-      <div className="flex-1">
-        <Header />
-        <PageWrapper maxWidth="full">
-          <PageTitle subtitle="Synthèses IA par secteur, classées par gravité et impact population.">
-            Vue par secteur
-          </PageTitle>
+    <div className="flex-1 bg-gradient-to-b from-background to-white">
+      <Header />
+      <PageWrapper maxWidth="full">
+        <PageTitle subtitle="Synthèses IA par secteur, classées par gravité et impact population.">
+          Vue par secteur
+        </PageTitle>
 
           <div className="mb-6">
             <Select
@@ -170,7 +168,6 @@ export default function SectorView() {
             ))}
           </div>
         </PageWrapper>
-      </div>
     </div>
   );
 }

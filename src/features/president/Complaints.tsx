@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Header, Sidebar, PageWrapper } from '../../components/layout';
+import { Header, PageWrapper } from '../../components/layout';
 import { Input, Select, Badge } from '../../components/ui';
 
 type Urgency = 'high' | 'medium' | 'low';
@@ -115,11 +115,9 @@ export default function Complaints() {
   }, [search, sector, region, urgency]);
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-background to-white">
-      <Sidebar />
-      <div className="flex-1">
-        <Header />
-        <PageWrapper maxWidth="full">
+    <div className="flex-1 bg-gradient-to-b from-background to-white">
+      <Header />
+      <PageWrapper maxWidth="full">
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-text">Doléances consolidées</h1>
             <p className="text-gray-600">
@@ -206,7 +204,6 @@ export default function Complaints() {
             )}
           </div>
         </PageWrapper>
-      </div>
     </div>
   );
 }

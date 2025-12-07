@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Header, PageWrapper } from '../../components/layout';
 import {
   Button,
@@ -15,6 +16,7 @@ import {
 
 export default function DesignSystemPreview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [authView, setAuthView] = useState<'signup' | 'login' | 'recover'>('signup');
 
   const selectOptions = [
     { value: 'option1', label: 'Option 1' },
@@ -31,6 +33,103 @@ export default function DesignSystemPreview() {
         </PageTitle>
 
         <div className="space-y-8">
+          {/* Parcours Auth */}
+          <Card>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-text">Parcours Auth (design)</h2>
+              <div className="flex items-center gap-2">
+                {[
+                  { key: 'signup', label: 'Créer un compte' },
+                  { key: 'login', label: 'Connexion' },
+                  { key: 'recover', label: 'Récupération' },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    onClick={() => setAuthView(tab.key as typeof authView)}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition border ${
+                      authView === tab.key
+                        ? 'bg-primary text-white border-primary shadow-sm'
+                        : 'bg-white text-text border-gray-200 hover:border-primary/60'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+                <Link
+                  to="/login"
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  Voir la page Connexion
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-[2fr,1fr]">
+              <div className="space-y-4">
+                {authView === 'signup' && (
+                  <>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <Input label="Nom" placeholder="Nom" />
+                      <Input label="Prénom" placeholder="Prénom" />
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <Input label="Email" type="email" placeholder="adresse@mail.com" />
+                      <Input label="Téléphone" type="tel" placeholder="+261 ..." />
+                    </div>
+                    <Input label="Mot de passe" type="password" placeholder="••••••••" />
+                    <div className="flex gap-3">
+                      <Button>Créer mon compte</Button>
+                      <Button variant="outline" onClick={() => setAuthView('login')}>
+                        J’ai déjà un compte
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {authView === 'login' && (
+                  <>
+                    <Input label="Email" type="email" placeholder="adresse@mail.com" />
+                    <Input label="Mot de passe" type="password" placeholder="••••••••" />
+                    <div className="flex flex-wrap gap-3 items-center">
+                      <Button>Se connecter</Button>
+                      <button
+                        type="button"
+                        className="text-sm font-semibold text-primary hover:underline"
+                        onClick={() => setAuthView('recover')}
+                      >
+                        Mot de passe oublié ?
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {authView === 'recover' && (
+                  <>
+                    <Input label="Email" type="email" placeholder="adresse@mail.com" />
+                    <Button>Envoyer un lien de récupération</Button>
+                    <button
+                      type="button"
+                      className="text-sm font-semibold text-primary hover:underline"
+                      onClick={() => setAuthView('login')}
+                    >
+                      Retour à la connexion
+                    </button>
+                  </>
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-4 text-sm text-gray-600 space-y-2">
+                <p className="font-semibold text-text">Notes design</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Structure simple en card, boutons pill pour naviguer entre les étapes.</li>
+                  <li>Champs communs : nom, prénom, email, téléphone, mot de passe.</li>
+                  <li>Actions secondaires : lien vers connexion ou récupération.</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+
           {/* Buttons */}
           <Card>
             <h2 className="text-xl font-bold text-text mb-4">Boutons</h2>

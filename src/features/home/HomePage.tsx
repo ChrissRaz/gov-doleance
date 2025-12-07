@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 const heroBackground = '/assets/hero-palace.jpeg';
 const seal = '/assets/republique.png';
@@ -101,14 +101,38 @@ const commitments = [
 ];
 
 export default function HomePage() {
+  const [language, setLanguage] = useState('fr');
+
   return (
     <div className="bg-white text-gray-900">
       {/* Hero */}
       <div className="relative isolate overflow-hidden">
+        <div className="absolute right-6 top-4 z-10 flex items-center gap-3">
+          <label htmlFor="home-language-select" className="sr-only">
+            Changer de langue
+          </label>
+          <select
+            id="home-language-select"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="text-sm font-semibold text-white border border-white/40 rounded-lg px-3 py-2 bg-white/10 backdrop-blur-sm hover:border-white focus:outline-none focus:ring-2 focus:ring-white/60"
+          >
+            <option className="text-gray-900" value="mg">MG</option>
+            <option className="text-gray-900" value="fr">FR</option>
+            <option className="text-gray-900" value="en">EN</option>
+          </select>
+          <Link
+            to="/portail"
+            className="text-sm font-semibold text-white border border-white/40 rounded-lg px-3 py-2 bg-white/10 backdrop-blur-sm hover:border-white focus:outline-none focus:ring-2 focus:ring-white/60"
+          >
+            Aide
+          </Link>
+        </div>
+
         <img
           src={heroBackground}
           alt="Palais de la Présidence"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[center_60%]"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#0c2143]/95 via-[#0c2143]/88 to-[#0b8a65]/75" />
 

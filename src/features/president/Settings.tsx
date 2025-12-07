@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Sidebar, PageWrapper } from '../../components/layout';
+import { Header, PageWrapper } from '../../components/layout';
 import { Card, PageTitle, Input, Button, FormGroup, Select } from '../../components/ui';
 
 const sectorOptions = [
@@ -25,11 +25,9 @@ const languageOptions = [
 
 export default function Settings() {
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-background to-white">
-      <Sidebar />
-      <div className="flex-1">
-        <Header />
-        <PageWrapper maxWidth="lg">
+    <div className="flex-1 bg-gradient-to-b from-background to-white">
+      <Header />
+      <PageWrapper maxWidth="lg">
           <PageTitle subtitle="Réglages généraux du portail et préférences d’alertes.">
             Paramètres
           </PageTitle>
@@ -102,7 +100,6 @@ export default function Settings() {
             </FormGroup>
           </Card>
         </PageWrapper>
-      </div>
     </div>
   );
 }
