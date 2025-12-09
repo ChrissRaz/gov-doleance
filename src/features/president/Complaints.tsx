@@ -94,11 +94,39 @@ const urgencyFilters: { value: Urgency | 'all'; label: string }[] = [
   { value: 'low', label: 'Urgence faible' },
 ];
 
+const periodOptions = [
+  { value: 'all', label: 'Toutes périodes' },
+  { value: '7', label: '7 derniers jours' },
+  { value: '30', label: '30 derniers jours' },
+  { value: '90', label: '90 derniers jours' },
+  { value: '365', label: '12 derniers mois' },
+  { value: 'custom', label: 'Personnalisé' },
+];
+
 export default function Complaints() {
   const [search, setSearch] = useState('');
   const [sector, setSector] = useState('all');
   const [region, setRegion] = useState('all');
   const [urgency, setUrgency] = useState<Urgency | 'all'>('all');
+  const [period, setPeriod] = useState('30');
+  const [customFrom, setCustomFrom] = useState('');
+  const [customTo, setCustomTo] = useState('');
+
+  const isWithinPeriod = (isoDate: string) => {
+    if (period === 'all') return true;
+    if (period === 'custom') {
+      const date = new Date(isoDate);
+      const fromOk = customFrom ? date >= new Date(customFrom) : true;
+      const toOk = customTo ? date <= new Date(customTo) : true;
+      return fromOk && toOk;
+    }
+    const days = parseInt(period, 10);
+    const now = new Date();
+    const target = new Date(isoDate);
+    const diffMs = now.getTime() - target.getTime();
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+    return diffDays <= days;
+  };
 
   const filtered = useMemo(() => {
     return complaints.filter((item) => {
@@ -110,9 +138,10 @@ export default function Complaints() {
       const matchesSector = sector === 'all' || item.sector === sector;
       const matchesRegion = region === 'all' || item.region === region;
       const matchesUrgency = urgency === 'all' || item.urgency === urgency;
-      return matchesSearch && matchesSector && matchesRegion && matchesUrgency;
+      const matchesPeriod = isWithinPeriod(item.date);
+      return matchesSearch && matchesSector && matchesRegion && matchesUrgency && matchesPeriod;
     });
-  }, [search, sector, region, urgency]);
+  }, [search, sector, region, urgency, period, customFrom, customTo]);
 
   return (
     <div className="flex-1 bg-gradient-to-b from-background to-white">
@@ -125,7 +154,7 @@ export default function Complaints() {
             </p>
           </div>
 
-          <div className="mb-6 flex flex-wrap gap-4 items-center">
+          <div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
             <div className="flex-1 min-w-[220px]">
               <Input
                 placeholder="Rechercher (id, titre, résumé)..."
@@ -138,15 +167,46 @@ export default function Complaints() {
               value={sector}
               onChange={(e) => setSector(e.target.value)}
               fullWidth={false}
-              className="w-full md:w-48"
+              className="w-full"
             />
             <Select
               options={regionOptions}
               value={region}
               onChange={(e) => setRegion(e.target.value)}
               fullWidth={false}
-              className="w-full md:w-48"
+              className="w-full"
             />
+            <div className="flex flex-col gap-2 w-full">
+              <Select
+                options={periodOptions}
+                value={period}
+                onChange={(e) => setPeriod(e.target.value)}
+                fullWidth={false}
+                className="w-full"
+              />
+              {period === 'custom' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs font-semibold text-gray-500">Du</span>
+                    <Input
+                      type="date"
+                      value={customFrom}
+                      onChange={(e) => setCustomFrom(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs font-semibold text-gray-500">Au</span>
+                    <Input
+                      type="date"
+                      value={customTo}
+                      onChange={(e) => setCustomTo(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="bg-white border-2 border-gray-200 rounded-2xl p-4 md:p-5 shadow-sm mb-6">

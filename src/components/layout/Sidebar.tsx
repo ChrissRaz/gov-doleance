@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
+const MuiPerson = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+  </svg>
+);
+
 interface SidebarItem {
   label: string;
   path: string;
@@ -29,11 +35,11 @@ const menuItems: SidebarItem[] = [
     )
   },
   {
-    label: 'Synthèse par secteur',
-    path: '/president/sectors',
+    label: 'Suggestions d\'actions',
+    path: '/president/actions',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     )
   },
@@ -47,11 +53,11 @@ const menuItems: SidebarItem[] = [
     )
   },
   {
-    label: 'Suggestions d\'actions',
-    path: '/president/actions',
+    label: 'Synthèse par secteur',
+    path: '/president/sectors',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
       </svg>
     )
   },
@@ -76,7 +82,11 @@ export default function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-3 bg-white rounded-xl shadow-lg border-2 border-gray-200 hover:border-primary/30 transition-all"
+        className="lg:hidden fixed z-50 p-3 bg-white rounded-xl shadow-lg border-2 border-gray-200 hover:border-primary/30 transition-all"
+        style={{
+          top: 'calc(1rem + env(safe-area-inset-top, 0px))',
+          right: 'calc(1rem + env(safe-area-inset-right, 0px))',
+        }}
         aria-label="Toggle menu"
       >
         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -98,24 +108,11 @@ export default function Sidebar() {
 
       {/* Sidebar - Desktop & Mobile */}
       <aside className={classNames(
-        'fixed lg:static inset-y-0 left-0 z-40 w-72 bg-white border-r-2 border-gray-200 min-h-screen shadow-lg transform transition-transform duration-300 ease-in-out',
+        'fixed lg:sticky inset-y-0 lg:top-0 left-0 z-40 w-72 bg-white border-r-2 border-gray-200 h-screen shadow-lg transform transition-transform duration-300 ease-in-out',
         'lg:flex lg:flex-col lg:translate-x-0',
         isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
       )}>
-        <div className="p-6">
-          {/* Logo et titre */}
-          <div className="mb-8 pb-6 border-b-2 border-gray-200">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-xl">P</span>
-              </div>
-              <div>
-                <h1 className="font-bold text-base text-text">Tableau de Bord</h1>
-                <p className="text-xs text-gray-600">Pilotage Présidentiel</p>
-              </div>
-            </div>
-          </div>
-
+        <div className="h-full overflow-y-auto p-6 flex flex-col">
           {/* Navigation */}
           <div>
             <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">
@@ -150,6 +147,21 @@ export default function Sidebar() {
                 );
               })}
             </nav>
+          </div>
+
+          {/* Actions rapides - Mobile */}
+          <div className="mt-8 lg:mt-auto">
+            <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-2">
+              Actions rapides
+            </h2>
+            <div className="flex flex-col gap-3">
+              <button className="flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 border-gray-200 bg-white shadow-sm hover:border-primary/40 transition-all duration-200">
+                <div className="w-5 h-5 text-gray-700">
+                  <MuiPerson className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-semibold text-gray-800">Déconnexion</span>
+              </button>
+            </div>
           </div>
         </div>
       </aside>

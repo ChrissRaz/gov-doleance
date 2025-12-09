@@ -99,6 +99,10 @@ export default function Settings() {
               </div>
             </FormGroup>
           </Card>
+
+          <div className="mt-8 flex justify-end">
+            <Button variant="primary">Enregistrer les modifications</Button>
+          </div>
         </PageWrapper>
     </div>
   );

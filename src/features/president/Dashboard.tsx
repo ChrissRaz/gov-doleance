@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MuiPerson = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -19,6 +20,7 @@ const overview = [
     trend: '+12%',
     trendColor: 'text-[#1db67f]',
     iconBg: 'bg-gradient-to-br from-emerald-400 to-teal-500',
+    path: '/president/complaints',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -31,6 +33,7 @@ const overview = [
     trend: '-4%',
     trendColor: 'text-[#e74c3c]',
     iconBg: 'bg-gradient-to-br from-red-400 to-rose-500',
+    path: '/president/complaints',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -44,6 +47,7 @@ const overview = [
     trend: '+8%',
     trendColor: 'text-[#1db67f]',
     iconBg: 'bg-gradient-to-br from-pink-400 to-rose-500',
+    path: '/president/sector/Sant%C3%A9',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -57,6 +61,7 @@ const overview = [
     trend: '-8%',
     trendColor: 'text-[#e74c3c]',
     iconBg: 'bg-gradient-to-br from-blue-400 to-indigo-500',
+    path: '/president/sector/%C3%89ducation',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -70,6 +75,7 @@ const overview = [
     trend: '-15%',
     trendColor: 'text-[#e74c3c]',
     iconBg: 'bg-gradient-to-br from-orange-400 to-amber-500',
+    path: '/president/sector/Infrastructure',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -83,6 +89,7 @@ const overview = [
     trend: '+12%',
     trendColor: 'text-[#1db67f]',
     iconBg: 'bg-gradient-to-br from-purple-400 to-violet-500',
+    path: '/president/regions',
     icon: (
       <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -252,43 +259,28 @@ const sectors = [
 export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20">
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGg4di04aC04djh6bTAtOGg4di04aC04djh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-6 pl-20 lg:pl-6 py-6">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Tableau Présidentiel</h1>
-            <p className="text-xs sm:text-sm text-emerald-200 mt-1 flex items-center gap-2">
-              <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2a7 7 0 00-7 7c0 5.67 7 11 7 11s7-5.33 7-11a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-              </svg>
-              République de Madagascar
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 px-3 sm:px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-200 hover:scale-105">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-              </svg>
-              <span className="hidden sm:inline">Personnaliser</span>
-            </button>
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-blue-500 text-white shadow-lg ring-2 ring-white/20">
-              <MuiPerson className="h-6 w-6" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 pb-10 sm:pb-12">
+        <div className="py-6 sm:py-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+            <div className="flex-1 flex flex-col gap-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">Vue d'ensemble</h2>
+              <span className="text-sm text-slate-500">Dernière mise à jour: il y a 5 min</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 pb-12">
-        <div className="py-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">Vue d'ensemble</h2>
-            <div className="text-sm text-slate-500">Dernière mise à jour: il y a 5 min</div>
+            <div className="flex items-center justify-start sm:justify-end">
+              <button className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-white border border-slate-200 px-3 text-sm font-semibold text-slate-800 shadow-sm hover:border-primary/40 transition-all duration-200">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+                <span className="hidden sm:inline">Personnaliser</span>
+              </button>
+            </div>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {overview.map((item, index) => (
-              <div
+              <Link
+                to={item.path || '#'}
                 key={item.label}
-                className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-slate-200/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-slate-200/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/40"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-slate-100/50 to-transparent rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500" />
@@ -301,11 +293,11 @@ export default function Dashboard() {
                       {item.trend}
                     </span>
                   </div>
-                  <p className="text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">{item.value}</p>
-                  <p className="text-sm font-semibold text-slate-700">{item.label}</p>
+                  <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">{item.value}</p>
+                  <p className="text-sm font-semibold text-slate-700 leading-tight">{item.label}</p>
                   {item.subtitle && <p className="text-xs text-slate-500 mt-1">{item.subtitle}</p>}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -313,8 +305,8 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           {/* Alertes */}
           <div>
-            <div className="mb-5 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-slate-900">Alertes prioritaires</h3>
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">Alertes prioritaires</h3>
               <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
                 <MuiSearch className="h-4 w-4" /> Filtre
               </button>
@@ -352,14 +344,17 @@ export default function Dashboard() {
 
           {/* Suggestions */}
           <div>
-            <div className="mb-5 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-slate-900">Suggestions d'actions</h3>
-              <button className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1">
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">Suggestions d'actions</h3>
+              <Link
+                to="/president/actions"
+                className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 self-start sm:self-auto border-2 border-emerald-600/40 rounded-lg px-2 py-1.5 hover:border-emerald-700/60"
+              >
                 Voir plus
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </Link>
             </div>
             <div className="space-y-3">
               {actions.map((action, index) => (
@@ -398,20 +393,27 @@ export default function Dashboard() {
 
         {/* Plaintes par secteur */}
         <div className="mt-10">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-slate-900">Plaintes par secteur</h3>
-            <button className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-2">
+            <div>
+              <h3 className="text-2xl font-bold text-slate-900">Plaintes par secteur (30j)</h3>
+              <p className="text-sm text-slate-500">Volumes et tendances par secteur; cliquez pour accéder à la synthèse détaillée.</p>
+            </div>
+            <Link
+              to="/president/sectors"
+              className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5 self-start sm:self-auto border border-slate-300 rounded-lg px-3 py-1.5"
+            >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 4h18M3 12h18M3 20h18" />
               </svg>
-              Tout voir
-            </button>
+              Voir la synthèse
+            </Link>
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {sectors.map((sector, index) => (
-              <div
+              <Link
+                to={`/president/sector/${encodeURIComponent(sector.title)}`}
                 key={sector.title}
-                className="group relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/40"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-slate-100/40 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" />
@@ -449,7 +451,7 @@ export default function Dashboard() {
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -458,15 +460,11 @@ export default function Dashboard() {
       <div className="relative overflow-hidden bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-900">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDEzNGg4di04aC04djh6bTAtOGg4di04aC04djh6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-40" />
         <div className="relative px-6 py-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <svg className="w-5 h-5 text-emerald-300" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-            <p className="text-sm font-bold text-emerald-100">Informations générées par IA</p>
-          </div>
-          <p className="text-xs text-emerald-200 max-w-3xl mx-auto leading-relaxed">
-            Ces suggestions sont informatives et basées sur l'analyse automatique des données. Elles nécessitent une validation approfondie avant toute mise en œuvre.
-          </p>
+          <img
+            src="/assets/republique.png"
+            alt="Logo de la République de Madagascar"
+            className="mx-auto h-16 sm:h-20 object-contain drop-shadow-lg"
+          />
         </div>
       </div>
     </div>
